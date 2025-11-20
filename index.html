@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mini Auction Hub</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header>
+      <h1>Auction Hub</h1>
+      <nav>
+        <ul class="navigation">
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#details">Item Details</a></li>
+          <li><a href="#bidding">Place Bid</a></li>
+          <li><a href="#history">Bid History</a></li>
+        </ul>
+      </nav>
+    </header>
+    <hr />
+    <!-- Overview Section -->
+    <section id="overview">
+      <h2>Auction Overview</h2>
+
+      <table border="0" cellpadding="10">
+        <tr>
+          <!-- Item 1 -->
+          <td>
+            <article>
+              <figure>
+                <img src="images/watch.jpg" alt="Auction Item 1" width="260" />
+                <figcaption>Vintage Collector’s Watch (Model 1953)</figcaption>
+              </figure>
+              <p>
+                <strong>Description:</strong> A rare collector's watch known for
+                its precision and timeless design.
+              </p>
+              <table border="1" cellpadding="8">
+                <tr>
+                  <th>Starting Price</th>
+                  <td>$80</td>
+                </tr>
+                <tr>
+                  <th>Current Highest Bid</th>
+                  <td><strong>$120</strong></td>
+                </tr>
+                <tr>
+                  <th>Time Remaining</th>
+                  <td><time>01:20:33</time></td>
+                </tr>
+              </table>
+
+              <!-- Item 1 Specifications -->
+              <details>
+                <summary><strong>🔍 Specifications</strong></summary>
+                <ul>
+                  <li>Brand: Omega</li>
+                  <li>Model: 1953 Classic</li>
+                  <li>Material: Stainless Steel</li>
+                  <li>Condition: Excellent</li>
+                  <li>Shipping: Worldwide</li>
+                </ul>
+              </details>
+            </article>
+          </td>
+
+          <!-- Item 2 -->
+          <td>
+            <article>
+              <figure>
+                <img
+                  src="images/watch2.avif"
+                  alt="Auction Item 2"
+                  width="260"
+                />
+                <figcaption>Luxury Wristwatch (Model 2020)</figcaption>
+              </figure>
+              <p>
+                <strong>Description:</strong> Modern luxury wristwatch, sleek
+                design, and perfect for collectors.
+              </p>
+              <table border="1" cellpadding="8">
+                <tr>
+                  <th>Starting Price</th>
+                  <td>$150</td>
+                </tr>
+                <tr>
+                  <th>Current Highest Bid</th>
+                  <td><strong>$200</strong></td>
+                </tr>
+                <tr>
+                  <th>Time Remaining</th>
+                  <td><time>02:10:15</time></td>
+                </tr>
+              </table>
+
+              <!-- Item 2 Specifications -->
+              <details>
+                <summary><strong>🔍 Specifications</strong></summary>
+                <ul>
+                  <li>Brand: Rolex</li>
+                  <li>Model: 2020 Modern</li>
+                  <li>Material: Stainless Steel & Ceramic</li>
+                  <li>Condition: Like New</li>
+                  <li>Shipping: Worldwide</li>
+                </ul>
+              </details>
+            </article>
+          </td>
+
+          <!-- Item 3 -->
+          <td>
+            <article>
+              <figure>
+                <img
+                  src="images/watch3.jpeg"
+                  alt="Auction Item 3"
+                  width="260"
+                />
+                <figcaption>Classic Gold Watch (Model 1985)</figcaption>
+              </figure>
+              <p>
+                <strong>Description:</strong> Elegant gold watch, timeless
+                design, in excellent condition.
+              </p>
+              <table border="1" cellpadding="8">
+                <tr>
+                  <th>Starting Price</th>
+                  <td>$200</td>
+                </tr>
+                <tr>
+                  <th>Current Highest Bid</th>
+                  <td><strong>$250</strong></td>
+                </tr>
+                <tr>
+                  <th>Time Remaining</th>
+                  <td><time>03:05:45</time></td>
+                </tr>
+              </table>
+
+              <!-- Item 3 Specifications -->
+              <details>
+                <summary><strong>🔍 Specifications</strong></summary>
+                <ul>
+                  <li>Brand: Seiko</li>
+                  <li>Model: 1985 Classic Gold</li>
+                  <li>Material: Gold Plated Stainless Steel</li>
+                  <li>Condition: Excellent</li>
+                  <li>Shipping: Worldwide</li>
+                </ul>
+              </details>
+            </article>
+          </td>
+        </tr>
+      </table>
+    </section>
+
+    <hr />
+
+    <!-- Bidding Section -->
+    <section id="bidding">
+      <h2>Place Your Bid</h2>
+
+      <form>
+        <fieldset>
+          <legend><strong>Bid Form</strong></legend>
+
+          <label for="bidder-name">Your Name:</label><br />
+          <input
+            type="text"
+            id="bidder-name"
+            placeholder="Enter name"
+          /><br /><br />
+
+          <label for="bid-amount">Bid Amount ($):</label><br />
+          <input
+            type="number"
+            id="bid-amount"
+            placeholder="Enter bid"
+          /><br /><br />
+
+          <label for="bid-progress">Auction Activity:</label><br />
+          <progress id="bid-progress" value="70" max="100"></progress
+          ><br /><br />
+
+          <button type="submit">Submit Bid</button>
+        </fieldset>
+      </form>
+    </section>
+
+    <hr />
+
+    <!-- Bid History Section -->
+    <section id="history">
+      <h2>Bid History</h2>
+
+      <article>
+        <h3>Recent Bids</h3>
+        <ol>
+          <li>John — $120</li>
+          <li>Sarah — $110</li>
+          <li>Mark — $100</li>
+        </ol>
+      </article>
+
+      <aside>
+        <h4>Bid Strength Indicator</h4>
+        <meter value="120" min="80" max="200">120</meter>
+        <p>
+          This shows how high the current bid is compared to the starting value.
+        </p>
+      </aside>
+    </section>
+
+    <hr />
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2025 Mini Auction Hub | All Rights Reserved</p>
+    </footer>
+  </body>
+</html>

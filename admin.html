@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Auction Admin Panel</title>
+  </head>
+
+  <body>
+    <header>
+      <h1>Admin Dashboard</h1>
+      <hr />
+    </header>
+
+    <section>
+      <h2>Enter Auction Item Information</h2>
+
+      <form method="post" enctype="multipart/form-data">
+        <fieldset>
+          <legend><strong>Item Information</strong></legend>
+
+          <label>Item Name:</label><br />
+          <input type="text" placeholder="e.g., Vintage Watch" /><br /><br />
+
+          <label>Item Description:</label><br />
+          <textarea
+            rows="5"
+            cols="40"
+            placeholder="Describe the item"
+          ></textarea
+          ><br /><br />
+
+          <label>Upload Item Image:</label><br />
+          <input type="file" /><br /><br />
+
+          <label>Starting Price ($):</label><br />
+          <input type="number" placeholder="80" /><br /><br />
+
+          <label>Auction Starting Time:</label><br />
+          <input type="datetime-local" /><br /><br />
+
+          <label>Auction Ending Time:</label><br />
+          <input type="datetime-local" /><br /><br />
+        </fieldset>
+
+        <br />
+
+        <fieldset>
+          <legend><strong>Technical Details</strong></legend>
+          <label>Brand:</label><br />
+          <input type="text" /><br /><br />
+
+          <label>Model:</label><br />
+          <input type="text" /><br /><br />
+
+          <label>Material:</label><br />
+          <input type="text" /><br /><br />
+
+          <label>Condition:</label><br />
+          <select>
+            <option>Excellent</option>
+            <option>Good</option>
+            <option>Fair</option>
+            <option>Poor</option></select
+          ><br /><br />
+
+          <label>Shipping:</label><br />
+          <input type="text" placeholder="e.g., Worldwide" /><br /><br />
+        </fieldset>
+
+        <br />
+
+        <button type="submit">Save Auction Setup</button>
+      </form>
+    </section>
+
+    <hr />
+
+    <footer>
+      <p>&copy; 2025 Mini Auction Hub Admin</p>
+    </footer>
+  </body>
+</html>
