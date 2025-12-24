@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - Mini Auction Hub</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/profile.css">
+</head>
+<body>
+    <header>
+        <h1>Mini Auction Hub</h1>
+        <nav>
+            <ul class="navigation">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#auctions">Auctions</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="#" onclick="Auth.logout()">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="profile-container">
+            <div class="profile-header">
+                <div class="profile-avatar" id="userAvatar">U</div>
+                <h2 id="userName">Loading...</h2>
+                <p id="userEmail">Loading...</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number" id="totalBids">0</span>
+                    <div class="stat-label">Total Bids</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="activeBids">0</span>
+                    <div class="stat-label">Active Bids</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="watchlistCount">0</span>
+                    <div class="stat-label">Watchlist</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="joinDate">--</span>
+                    <div class="stat-label">Member Since</div>
+                </div>
+            </div>
+
+            <div class="profile-info">
+                <div class="info-card">
+                    <h3>Account Information</h3>
+                    <p><strong>Username:</strong> <span id="profileUsername">-</span></p>
+                    <p><strong>Full Name:</strong> <span id="profileFullName">-</span></p>
+                    <p><strong>Email:</strong> <span id="profileEmail">-</span></p>
+                </div>
+                <div class="info-card">
+                    <h3>Account Status</h3>
+                    <p><strong>Status:</strong> <span style="color: #16a34a;">Active</span></p>
+                    <p><strong>Account Type:</strong> Standard User</p>
+                    <p><strong>Last Login:</strong> <span id="lastLogin">Just now</span></p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Recent Bids</h3>
+                <div class="bids-list" id="recentBids">
+                    <div class="no-data">No bids placed yet</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Watchlist</h3>
+                <div class="watchlist" id="userWatchlist">
+                    <div class="no-data">No items in watchlist</div>
+                </div>
+            </div>
+
+
+            <div class="section">
+                <h3>Daily Inspiration</h3>
+                <div class="info-card">
+                    <p id="dailyQuote">"The best way to predict the future is to create it." - Peter Drucker</p>
+                    <button onclick="loadRandomQuote()" class="btn btn-secondary" id="quoteBtn">Get New Quote</button>
+                </div>
+            </div>
+
+            <div class="actions">
+                <a href="index.html" class="btn btn-primary">Browse Auctions</a>
+                <button onclick="editProfile()" class="btn btn-secondary">Edit Profile</button>
+                <button onclick="Auth.logout()" class="btn btn-danger">Logout</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Mini Auction Hub | All Rights Reserved</p>
+    </footer>
+
+    <script src="js/auth.js"></script>
+    <script src="js/api.js"></script>
+    <script>
+        // Load user profile data
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUser = Auth.getCurrentUser();
+
+            if (!currentUser) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Update profile information
+            document.getElementById('userAvatar').textContent = currentUser.fullName.charAt(0).toUpperCase();
+            document.getElementById('userName').textContent = currentUser.fullName;
+            document.getElementById('userEmail').textContent = currentUser.email;
+
+            document.getElementById('profileUsername').textContent = currentUser.username;
+            document.getElementById('profileFullName').textContent = currentUser.fullName;
+            document.getElementById('profileEmail').textContent = currentUser.email;
+
+            // Update stats
+            document.getElementById('totalBids').textContent = currentUser.bids ? currentUser.bids.length : 0;
+            document.getElementById('activeBids').textContent = currentUser.bids ? currentUser.bids.length : 0;
+            document.getElementById('watchlistCount').textContent = currentUser.watchlist ? currentUser.watchlist.length : 0;
+
+            // Format join date
+            if (currentUser.joinDate) {
+                const joinDate = new Date(currentUser.joinDate);
+                document.getElementById('joinDate').textContent = joinDate.getFullYear();
+            }
+
+            // Load and display bids
+            loadRecentBids(currentUser);
+
+            // Load and display watchlist
+            loadWatchlist(currentUser);
+        });
+
+        function loadRecentBids(user) {
+            const bidsContainer = document.getElementById('recentBids');
+
+            if (!user.bids || user.bids.length === 0) {
+                return;
+            }
+
+            bidsContainer.innerHTML = '';
+
+            // Sort bids by timestamp (most recent first)
+            const sortedBids = user.bids.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+            sortedBids.forEach(bid => {
+                const bidElement = document.createElement('div');
+                bidElement.className = 'bid-item';
+
+                const bidDate = new Date(bid.timestamp);
+                const formattedDate = bidDate.toLocaleDateString() + ' ' + bidDate.toLocaleTimeString();
+
+                bidElement.innerHTML = `
+                    <div class="bid-info">
+                        <h4>Auction #${bid.auctionId}</h4>
+                        <p>Bid placed on ${formattedDate}</p>
+                    </div>
+                    <div class="bid-amount">$${bid.amount}</div>
+                `;
+
+                bidsContainer.appendChild(bidElement);
+            });
+        }
+
+        function loadWatchlist(user) {
+            const watchlistContainer = document.getElementById('userWatchlist');
+
+            if (!user.watchlist || user.watchlist.length === 0) {
+                return;
+            }
+
+            watchlistContainer.innerHTML = '';
+
+            // Load auction data
+            fetch('data/data.json')
+                .then(response => response.json())
+                .then(data => {
+                    user.watchlist.forEach(auctionId => {
+                        const auction = data.auctions.find(a => a.id === auctionId);
+                        if (auction) {
+                            const itemElement = document.createElement('div');
+                            itemElement.className = 'watchlist-item';
+
+                            itemElement.innerHTML = `
+                                <div class="item-info">
+                                    <h4>${auction.title}</h4>
+                                    <p>Current bid: $${auction.currentBid}</p>
+                                </div>
+                                <a href="index.html#overview" class="btn btn-primary">View</a>
+                            `;
+
+                            watchlistContainer.appendChild(itemElement);
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.error('Error loading watchlist:', error);
+                });
+        }
+
+        function editProfile() {
+            alert('Edit profile feature coming soon!');
+        }
+
+        // Load random local quote
+        function loadRandomQuote() {
+            const quoteElement = document.getElementById('dailyQuote');
+            const quoteBtn = document.getElementById('quoteBtn');
+
+            quoteBtn.disabled = true;
+            quoteBtn.textContent = 'Loading...';
+
+            // Simulate loading delay
+            setTimeout(() => {
+                const quote = API.getRandomQuote();
+                quoteElement.innerHTML = `
+                    <strong>"${quote.content}"</strong><br>
+                    <em>- ${quote.author}</em>
+                `;
+                quoteBtn.disabled = false;
+                quoteBtn.textContent = 'Get New Quote';
+            }, 300);
+        }
+
+        // Load initial quote
+        document.addEventListener('DOMContentLoaded', function() {
+            // ... existing code ...
+            loadRandomQuote();
+        });
+    </script>
+</body>
+</html>

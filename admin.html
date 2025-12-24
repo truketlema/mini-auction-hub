@@ -1,92 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Auction Admin Panel</title>
-  </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Mini Auction Hub</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
 
-  <body>
-    <header>
-      <h1>Admin Dashboard</h1>
-      <hr />
+<body>
+    <!-- Header -->
+    <header class="admin-header">
+        <div class="header-content">
+            <h1>Admin Dashboard</h1>
+            <nav class="admin-nav">
+                <a href="index.html" class="btn-back">← Back to Auctions</a>
+            </nav>
+        </div>
     </header>
 
-    <section>
-      <h2>Enter Auction Item Information</h2>
+    <!-- Main Content -->
+    <main class="admin-main">
+        <!-- Success/Error Messages -->
+        <div id="message-container" class="message-container" style="display: none;">
+            <div id="message" class="message"></div>
+        </div>
 
-      <form method="post" enctype="multipart/form-data">
-        <fieldset>
-          <legend><strong>Item Information</strong></legend>
+        <!-- Auction Management Section -->
+        <section class="admin-section">
+            <div class="section-header">
+                <h2>Add New Auction Item</h2>
+                <p>Create a new auction item with all necessary details</p>
+            </div>
 
-          <label>Item Name:</label><br />
-          <input type="text" placeholder="e.g., Vintage Watch" /><br /><br />
+            <form id="auctionForm" class="admin-form" enctype="multipart/form-data">
+                <!-- Basic Information -->
+                <fieldset class="form-section">
+                    <legend>Basic Information</legend>
 
-          <label>Item Description:</label><br />
-          <textarea
-            rows="5"
-            cols="40"
-            placeholder="Describe the item"
-          ></textarea
-          ><br /><br />
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="itemName">Item Name *</label>
+                            <input type="text" id="itemName" name="itemName"
+                                   placeholder="e.g., Vintage Collector's Watch" required>
+                            <div class="error-message" id="nameError"></div>
+                        </div>
 
-          <label>Upload Item Image:</label><br />
-          <input type="file" /><br /><br />
+                        <div class="form-group">
+                            <label for="category">Category</label>
+                            <select id="category" name="category">
+                                <option value="Watches">Watches</option>
+                                <option value="Jewelry">Jewelry</option>
+                                <option value="Art">Art</option>
+                                <option value="Collectibles">Collectibles</option>
+                                <option value="Electronics">Electronics</option>
+                            </select>
+                        </div>
+                    </div>
 
-          <label>Starting Price ($):</label><br />
-          <input type="number" placeholder="80" /><br /><br />
+                    <div class="form-group">
+                        <label for="description">Description *</label>
+                        <textarea id="description" name="description" rows="4"
+                                  placeholder="Provide a detailed description of the item..." required></textarea>
+                        <div class="error-message" id="descriptionError"></div>
+                    </div>
 
-          <label>Auction Starting Time:</label><br />
-          <input type="datetime-local" /><br /><br />
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="startingPrice">Starting Price ($) *</label>
+                            <input type="number" id="startingPrice" name="startingPrice"
+                                   min="0.01" step="0.01" placeholder="0.00" required>
+                            <div class="error-message" id="priceError"></div>
+                        </div>
 
-          <label>Auction Ending Time:</label><br />
-          <input type="datetime-local" /><br /><br />
-        </fieldset>
+                        <div class="form-group">
+                            <label for="imageUpload">Item Image *</label>
+                            <input type="file" id="imageUpload" name="imageUpload"
+                                   accept="image/*" required>
+                            <small class="form-help">Supported formats: JPG, PNG, GIF, WebP</small>
+                            <div class="error-message" id="imageError"></div>
+                        </div>
+                    </div>
+                </fieldset>
 
-        <br />
+                <!-- Auction Timing -->
+                <fieldset class="form-section">
+                    <legend>Auction Timing</legend>
 
-        <fieldset>
-          <legend><strong>Technical Details</strong></legend>
-          <label>Brand:</label><br />
-          <input type="text" /><br /><br />
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="startTime">Auction Start Time</label>
+                            <input type="datetime-local" id="startTime" name="startTime">
+                            <small class="form-help">Leave empty to start immediately</small>
+                        </div>
 
-          <label>Model:</label><br />
-          <input type="text" /><br /><br />
+                        <div class="form-group">
+                            <label for="endTime">Auction End Time *</label>
+                            <input type="datetime-local" id="endTime" name="endTime" required>
+                            <div class="error-message" id="endTimeError"></div>
+                        </div>
+                    </div>
+                </fieldset>
 
-          <label>Material:</label><br />
-          <input type="text" /><br /><br />
+                <!-- Technical Specifications -->
+                <fieldset class="form-section">
+                    <legend>Technical Specifications</legend>
 
-          <label>Condition:</label><br />
-          <select>
-            <option>Excellent</option>
-            <option>Good</option>
-            <option>Fair</option>
-            <option>Poor</option></select
-          ><br /><br />
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="brand">Brand</label>
+                            <input type="text" id="brand" name="brand" placeholder="e.g., Omega">
+                        </div>
 
-          <label>Shipping:</label><br />
-          <input type="text" placeholder="e.g., Worldwide" /><br /><br />
-        </fieldset>
+                        <div class="form-group">
+                            <label for="model">Model</label>
+                            <input type="text" id="model" name="model" placeholder="e.g., 1953 Classic">
+                        </div>
+                    </div>
 
-        <br />
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="material">Material</label>
+                            <input type="text" id="material" name="material"
+                                   placeholder="e.g., Stainless Steel">
+                        </div>
 
-        <button type="submit">Save Auction Setup</button>
-      </form>
-    </section>
+                        <div class="form-group">
+                            <label for="condition">Condition</label>
+                            <select id="condition" name="condition">
+                                <option value="Excellent">Excellent</option>
+                                <option value="Good">Good</option>
+                                <option value="Fair">Fair</option>
+                                <option value="Poor">Poor</option>
+                            </select>
+                        </div>
+                    </div>
 
-    <hr />
+                    <div class="form-group">
+                        <label for="shipping">Shipping</label>
+                        <input type="text" id="shipping" name="shipping"
+                               placeholder="e.g., Worldwide" value="Worldwide">
+                    </div>
+                </fieldset>
 
-    <footer>
-      <p>&copy; 2025 Mini Auction Hub Admin</p>
+                <!-- Form Actions -->
+                <div class="form-actions">
+                    <button type="button" id="previewBtn" class="btn-secondary">Preview Item</button>
+                    <button type="submit" id="submitBtn" class="btn-primary">
+                        <span class="btn-text">Create Auction</span>
+                        <span class="btn-loading" style="display: none;">Creating...</span>
+                    </button>
+                    <button type="button" id="resetBtn" class="btn-secondary">Reset Form</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Existing Auctions Management -->
+        <section class="admin-section">
+            <div class="section-header">
+                <h2>Manage Existing Auctions</h2>
+                <p>View and manage current auction items</p>
+            </div>
+
+            <div id="auctions-list" class="auctions-list">
+                <!-- Existing auctions will be loaded here -->
+            </div>
+
+            <div id="no-auctions-admin" class="no-data" style="display: none;">
+                <h3>No auctions found</h3>
+                <p>Create your first auction using the form above!</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="admin-footer">
+        <p>&copy; 2025 Mini Auction Hub Admin Panel</p>
     </footer>
 
-    <script>
-        const adminForm = document.querySelector("form");
+    <!-- Preview Modal -->
+    <div id="previewModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Auction Item Preview</h3>
+                <button class="modal-close" onclick="closePreviewModal()">&times;</button>
+            </div>
+            <div id="previewContent" class="modal-body">
+                <!-- Preview content will be inserted here -->
+            </div>
+        </div>
+    </div>
 
-        adminForm.addEventListener("submit", function () {
-            alert("Auction item saved successfully.");
-        });
-    </script>
-
-
-  </body>
+    <!-- Scripts -->
+    <script src="js/api.js"></script>
+    <script src="js/admin.js"></script>
+</body>
 </html>

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Mini Auction Hub</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+    <header>
+        <h1>Mini Auction Hub</h1>
+        <nav>
+            <ul class="navigation">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="auth-container">
+            <h2>Create Your Account</h2>
+
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="fullName">Full Name:</label>
+                    <input type="text" id="fullName" name="fullName" required>
+                    <div id="fullNameError" class="error-message">Full name is required</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+                    <div id="usernameError" class="error-message">Username is required (3-15 characters)</div>
+                    <div id="usernameSuccess" class="success-message">Username is available</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                    <div id="emailError" class="error-message">Please enter a valid email address</div>
+                    <div id="emailSuccess" class="success-message">Email is valid</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                    <div id="passwordError" class="error-message">Password must be at least 6 characters</div>
+                    <div id="passwordStrength" class="password-strength"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password:</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                    <div id="confirmPasswordError" class="error-message">Passwords must match</div>
+                    <div id="confirmPasswordSuccess" class="success-message">Passwords match</div>
+                </div>
+
+                <div class="terms">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">I agree to the Terms and Conditions</label>
+                    <div id="termsError" class="error-message">You must accept the terms</div>
+                </div>
+
+                <button type="submit" class="btn-primary" id="registerBtn">Create Account</button>
+            </form>
+
+            <div class="auth-links">
+                <p>Already have an account? <a href="login.html">Login here</a></p>
+                <p><a href="index.html">Back to Home</a></p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Mini Auction Hub | All Rights Reserved</p>
+    </footer>
+
+    <script src="js/auth.js"></script>
+    <script>
+        // Real-time validation functions
+        function validateFullName() {
+            const name = document.getElementById('fullName').value.trim();
+            const error = document.getElementById('fullNameError');
+
+            if (name === '') {
+                error.textContent = 'Full name is required';
+                error.style.display = 'block';
+                document.getElementById('fullName').classList.add('invalid');
+                document.getElementById('fullName').classList.remove('valid');
+                return false;
+            } else if (name.length < 2) {
+                error.textContent = 'Full name must be at least 2 characters';
+                error.style.display = 'block';
+                document.getElementById('fullName').classList.add('invalid');
+                document.getElementById('fullName').classList.remove('valid');
+                return false;
+            } else {
+                error.style.display = 'none';
+                document.getElementById('fullName').classList.remove('invalid');
+                document.getElementById('fullName').classList.add('valid');
+                return true;
+            }
+        }
+
+        function validateUsername() {
+            const username = document.getElementById('username').value.trim();
+            const error = document.getElementById('usernameError');
+            const success = document.getElementById('usernameSuccess');
+            const regex = /^[a-zA-Z0-9_]{3,15}$/;
+
+            if (username === '') {
+                error.textContent = 'Username is required';
+                error.style.display = 'block';
+                success.style.display = 'none';
+                document.getElementById('username').classList.add('invalid');
+                document.getElementById('username').classList.remove('valid');
+                return false;
+            } else if (!regex.test(username)) {
+                error.textContent = 'Username must be 3-15 characters, letters, numbers, or underscores only';
+                error.style.display = 'block';
+                success.style.display = 'none';
+                document.getElementById('username').classList.add('invalid');
+                document.getElementById('username').classList.remove('valid');
+                return false;
+            } else {
+                error.style.display = 'none';
+                success.style.display = 'block';
+                document.getElementById('username').classList.remove('invalid');
+                document.getElementById('username').classList.add('valid');
+                return true;
+            }
+        }
+
+        function validateEmail() {
+            const email = document.getElementById('email').value.trim();
+            const error = document.getElementById('emailError');
+            const success = document.getElementById('emailSuccess');
+            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (email === '') {
+                error.textContent = 'Email is required';
+                error.style.display = 'block';
+                success.style.display = 'none';
+                document.getElementById('email').classList.add('invalid');
+                document.getElementById('email').classList.remove('valid');
+                return false;
+            } else if (!regex.test(email)) {
+                error.textContent = 'Please enter a valid email address';
+                error.style.display = 'block';
+                success.style.display = 'none';
+                document.getElementById('email').classList.add('invalid');
+                document.getElementById('email').classList.remove('valid');
+                return false;
+            } else {
+                error.style.display = 'none';
+                success.style.display = 'block';
+                document.getElementById('email').classList.remove('invalid');
+                document.getElementById('email').classList.add('valid');
+                return true;
+            }
+        }
+
+        function validatePassword() {
+            const password = document.getElementById('password').value;
+            const error = document.getElementById('passwordError');
+            const strength = document.getElementById('passwordStrength');
+
+            if (password === '') {
+                error.textContent = 'Password is required';
+                error.style.display = 'block';
+                strength.textContent = '';
+                document.getElementById('password').classList.add('invalid');
+                document.getElementById('password').classList.remove('valid');
+                return false;
+            } else if (password.length < 6) {
+                error.textContent = 'Password must be at least 6 characters';
+                error.style.display = 'block';
+                strength.textContent = '';
+                document.getElementById('password').classList.add('invalid');
+                document.getElementById('password').classList.remove('valid');
+                return false;
+            } else {
+                error.style.display = 'none';
+
+                // Password strength indicator
+                if (password.length >= 8 && /[A-Z]/.test(password) && /[0-9]/.test(password)) {
+                    strength.textContent = 'Strong password';
+                    strength.className = 'password-strength strength-strong';
+                } else if (password.length >= 6) {
+                    strength.textContent = 'Medium strength';
+                    strength.className = 'password-strength strength-medium';
+                } else {
+                    strength.textContent = 'Weak password';
+                    strength.className = 'password-strength strength-weak';
+                }
+
+                document.getElementById('password').classList.remove('invalid');
+                document.getElementById('password').classList.add('valid');
+                return true;
+            }
+        }
+
+        function validateConfirmPassword() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const error = document.getElementById('confirmPasswordError');
+            const success = document.getElementById('confirmPasswordSuccess');
+
+            if (confirmPassword === '') {
+                error.textContent = 'Please confirm your password';
+                error.style.display = 'block';
+                success.style.display = 'none';
+                document.getElementById('confirmPassword').classList.add('invalid');
+                document.getElementById('confirmPassword').classList.remove('valid');
+                return false;
+            } else if (confirmPassword !== password) {
+                error.textContent = 'Passwords do not match';
+                error.style.display = 'block';
+                success.style.display = 'none';
+                document.getElementById('confirmPassword').classList.add('invalid');
+                document.getElementById('confirmPassword').classList.remove('valid');
+                return false;
+            } else {
+                error.style.display = 'none';
+                success.style.display = 'block';
+                document.getElementById('confirmPassword').classList.remove('invalid');
+                document.getElementById('confirmPassword').classList.add('valid');
+                return true;
+            }
+        }
+
+        function validateTerms() {
+            const terms = document.getElementById('terms').checked;
+            const error = document.getElementById('termsError');
+
+            if (!terms) {
+                error.style.display = 'block';
+                return false;
+            } else {
+                error.style.display = 'none';
+                return true;
+            }
+        }
+
+        // Add event listeners for real-time validation
+        document.getElementById('fullName').addEventListener('input', validateFullName);
+        document.getElementById('username').addEventListener('input', validateUsername);
+        document.getElementById('email').addEventListener('input', validateEmail);
+        document.getElementById('password').addEventListener('input', function() {
+            validatePassword();
+            if (document.getElementById('confirmPassword').value !== '') {
+                validateConfirmPassword();
+            }
+        });
+        document.getElementById('confirmPassword').addEventListener('input', validateConfirmPassword);
+        document.getElementById('terms').addEventListener('change', validateTerms);
+
+        // Form submission
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Validate all fields
+            const isFullNameValid = validateFullName();
+            const isUsernameValid = validateUsername();
+            const isEmailValid = validateEmail();
+            const isPasswordValid = validatePassword();
+            const isConfirmPasswordValid = validateConfirmPassword();
+            const isTermsValid = validateTerms();
+
+            if (isFullNameValid && isUsernameValid && isEmailValid && isPasswordValid && isConfirmPasswordValid && isTermsValid) {
+                // Register user
+                const registerBtn = document.getElementById('registerBtn');
+                registerBtn.disabled = true;
+                registerBtn.textContent = 'Creating Account...';
+
+                const userData = {
+                    fullName: document.getElementById('fullName').value.trim(),
+                    username: document.getElementById('username').value.trim(),
+                    email: document.getElementById('email').value.trim(),
+                    password: document.getElementById('password').value,
+                    joinDate: new Date().toISOString(),
+                    bids: [],
+                    watchlist: []
+                };
+
+                // Simulate async operation
+                setTimeout(() => {
+                    const result = Auth.register(userData);
+                    if (result.success) {
+                        // Redirect to login with success message
+                        window.location.href = 'login.html?registered=true';
+                    } else {
+                        alert(result.message);
+                        registerBtn.disabled = false;
+                        registerBtn.textContent = 'Create Account';
+                    }
+                }, 1500);
+            } else {
+                // Scroll to first error
+                const firstError = document.querySelector('.error-message[style*="display: block"]');
+                if (firstError) {
+                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+        });
+    </script>
+</body>
+</html>

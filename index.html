@@ -1,234 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mini Auction Hub</title>
-    <link rel="stylesheet" href="css/style.css" />
-  </head>
+    <link rel="stylesheet" href="css/style.css">
+</head>
 
-  <body>
+<body>
     <!-- Header -->
-    <header>
-      <h1>Auction Hub</h1>
-      <nav>
-        <ul class="navigation">
-          <li><a href="#overview">Overview</a></li>
-          <li><a href="#details">Item Details</a></li>
-          <li><a href="#bidding">Place Bid</a></li>
-          <li><a href="#history">Bid History</a></li>
-        </ul>
-      </nav>
+    <header class="main-header">
+        <div class="header-content">
+            <h1>Mini Auction Hub</h1>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#overview">Auctions</a></li>
+                    <li><a href="#bidding">Place Bid</a></li>
+                    <li><a href="#history">Bid History</a></li>
+                    <li id="auth-nav">
+                        <a href="login.html" class="btn-login">Login</a>
+                        <a href="register.html" class="btn-register">Register</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </header>
-    <hr />
-    <!-- Overview Section -->
-    <section id="overview">
-      <h2>Auction Overview</h2>
 
-      <table border="0" cellpadding="10">
-        <tr>
-          <!-- Item 1 -->
-          <td>
-            <article>
-              <figure>
-                <img src="images/watch.jpg" alt="Auction Item 1" width="260" />
-                <figcaption>Vintage Collector’s Watch (Model 1953)</figcaption>
-              </figure>
-              <p>
-                <strong>Description:</strong> A rare collector's watch known for
-                its precision and timeless design.
-              </p>
-              <table border="1" cellpadding="8">
-                <tr>
-                  <th>Starting Price</th>
-                  <td>$80</td>
-                </tr>
-                <tr>
-                  <th>Current Highest Bid</th>
-                  <td><strong>$120</strong></td>
-                </tr>
-                <tr>
-                  <th>Time Remaining</th>
-                  <td><time>01:20:33</time></td>
-                </tr>
-              </table>
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Loading State -->
+        <div id="loading" class="loading-state">
+            <div class="loading-spinner"></div>
+            <p>Loading auctions...</p>
+        </div>
 
-              <!-- Item 1 Specifications -->
-              <details>
-                <summary><strong>🔍 Specifications</strong></summary>
-                <ul>
-                  <li>Brand: Omega</li>
-                  <li>Model: 1953 Classic</li>
-                  <li>Material: Stainless Steel</li>
-                  <li>Condition: Excellent</li>
-                  <li>Shipping: Worldwide</li>
-                </ul>
-              </details>
-            </article>
-          </td>
+        <!-- Auction Overview Section -->
+        <section id="overview" class="auctions-section">
+            <div class="section-header">
+                <h2>Live Auctions</h2>
+                <p>Discover unique collectibles and place your bids</p>
+            </div>
 
-          <!-- Item 2 -->
-          <td>
-            <article>
-              <figure>
-                <img
-                  src="images/watch2.avif"
-                  alt="Auction Item 2"
-                  width="260"
-                />
-                <figcaption>Luxury Wristwatch (Model 2020)</figcaption>
-              </figure>
-              <p>
-                <strong>Description:</strong> Modern luxury wristwatch, sleek
-                design, and perfect for collectors.
-              </p>
-              <table border="1" cellpadding="8">
-                <tr>
-                  <th>Starting Price</th>
-                  <td>$150</td>
-                </tr>
-                <tr>
-                  <th>Current Highest Bid</th>
-                  <td><strong>$200</strong></td>
-                </tr>
-                <tr>
-                  <th>Time Remaining</th>
-                  <td><time>02:10:15</time></td>
-                </tr>
-              </table>
+            <div id="auctions-grid" class="auctions-grid">
+                <!-- Auctions will be loaded dynamically -->
+            </div>
 
-              <!-- Item 2 Specifications -->
-              <details>
-                <summary><strong>🔍 Specifications</strong></summary>
-                <ul>
-                  <li>Brand: Rolex</li>
-                  <li>Model: 2020 Modern</li>
-                  <li>Material: Stainless Steel & Ceramic</li>
-                  <li>Condition: Like New</li>
-                  <li>Shipping: Worldwide</li>
-                </ul>
-              </details>
-            </article>
-          </td>
+            <div id="no-auctions" class="no-data" style="display: none;">
+                <h3>No auctions available</h3>
+                <p>Check back later for new items!</p>
+            </div>
+        </section>
 
-          <!-- Item 3 -->
-          <td>
-            <article>
-              <figure>
-                <img
-                  src="images/watch3.jpeg"
-                  alt="Auction Item 3"
-                  width="260"
-                />
-                <figcaption>Classic Gold Watch (Model 1985)</figcaption>
-              </figure>
-              <p>
-                <strong>Description:</strong> Elegant gold watch, timeless
-                design, in excellent condition.
-              </p>
-              <table border="1" cellpadding="8">
-                <tr>
-                  <th>Starting Price</th>
-                  <td>$200</td>
-                </tr>
-                <tr>
-                  <th>Current Highest Bid</th>
-                  <td><strong>$250</strong></td>
-                </tr>
-                <tr>
-                  <th>Time Remaining</th>
-                  <td><time>03:05:45</time></td>
-                </tr>
-              </table>
+        <!-- Bidding Section -->
+        <section id="bidding" class="bidding-section">
+            <div class="section-header">
+                <h2>Place Your Bid</h2>
+                <p>Join the excitement and place your bid on your favorite items</p>
+            </div>
 
-              <!-- Item 3 Specifications -->
-              <details>
-                <summary><strong>🔍 Specifications</strong></summary>
-                <ul>
-                  <li>Brand: Seiko</li>
-                  <li>Model: 1985 Classic Gold</li>
-                  <li>Material: Gold Plated Stainless Steel</li>
-                  <li>Condition: Excellent</li>
-                  <li>Shipping: Worldwide</li>
-                </ul>
-              </details>
-            </article>
-          </td>
-        </tr>
-      </table>
-    </section>
+            <div class="bidding-container">
+                <div id="bid-login-prompt" class="login-prompt">
+                    <h3>Login Required</h3>
+                    <p>Please <a href="login.html">login</a> or <a href="register.html">register</a> to place bids.</p>
+                </div>
 
-    <hr />
+                <div id="bid-form-container" class="bid-form-container" style="display: none;">
+                    <form id="bidForm" class="bid-form">
+                        <div class="form-group">
+                            <label for="selected-item">Select Item:</label>
+                            <select id="selected-item" required>
+                                <option value="">Choose an auction item...</option>
+                                <!-- Items will be loaded dynamically -->
+                            </select>
+                        </div>
 
-    <!-- Bidding Section -->
-    <section id="bidding">
-      <h2>Place Your Bid</h2>
+                        <div class="form-group">
+                            <label for="bid-amount">Your Bid Amount ($):</label>
+                            <input type="number" id="bid-amount" min="1" step="0.01" placeholder="Enter bid amount" required>
+                            <small id="bid-minimum" class="form-help">Minimum bid: $0</small>
+                        </div>
 
-      <form>
-        <fieldset>
-          <legend><strong>Bid Form</strong></legend>
+                        <div class="form-group">
+                            <label>Auction Progress:</label>
+                            <div class="progress-container">
+                                <progress id="bid-progress" value="70" max="100"></progress>
+                                <span id="progress-text">70% complete</span>
+                            </div>
+                        </div>
 
-          <label for="bidder-name">Your Name:</label><br />
-          <input
-            type="text"
-            id="bidder-name"
-            placeholder="Enter name"
-          /><br /><br />
+                        <button type="submit" class="btn-submit-bid" id="submitBidBtn">
+                            <span class="btn-text">Submit Bid</span>
+                            <span class="btn-loading" style="display: none;">Submitting...</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
 
-          <label for="bid-amount">Bid Amount ($):</label><br />
-          <input
-            type="number"
-            id="bid-amount"
-            placeholder="Enter bid"
-          /><br /><br />
+        <!-- Bid History Section -->
+        <section id="history" class="history-section">
+            <div class="section-header">
+                <h2>Bid History</h2>
+                <p>Recent bidding activity across all auctions</p>
+            </div>
 
-          <label for="bid-progress">Auction Activity:</label><br />
-          <progress id="bid-progress" value="70" max="100"></progress
-          ><br /><br />
+            <div class="history-container">
+                <div class="recent-bids">
+                    <h3>Recent Bids</h3>
+                    <div id="bid-history-list" class="bid-list">
+                        <!-- Bid history will be loaded dynamically -->
+                    </div>
+                </div>
 
-          <button type="submit">Submit Bid</button>
-        </fieldset>
-      </form>
-    </section>
-
-    <hr />
-
-    <!-- Bid History Section -->
-    <section id="history">
-      <h2>Bid History</h2>
-
-      <article>
-        <h3>Recent Bids</h3>
-        <ol>
-          <li>John — $120</li>
-          <li>Sarah — $110</li>
-          <li>Mark — $100</li>
-        </ol>
-      </article>
-
-      <aside>
-        <h4>Bid Strength Indicator</h4>
-        <meter value="120" min="80" max="200">120</meter>
-        <p>
-          This shows how high the current bid is compared to the starting value.
-        </p>
-      </aside>
-    </section>
-
-    <hr />
+                <aside class="bid-stats">
+                    <h4>Auction Statistics</h4>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-number" id="total-bids">0</div>
+                            <div class="stat-label">Total Bids</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" id="active-auctions">0</div>
+                            <div class="stat-label">Active Auctions</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" id="total-value">$0</div>
+                            <div class="stat-label">Total Value</div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </section>
+    </main>
 
     <!-- Footer -->
-    <footer>
-      <p>&copy; 2025 Mini Auction Hub | All Rights Reserved</p>
+    <footer class="main-footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Mini Auction Hub | All Rights Reserved</p>
+            <nav class="footer-nav">
+                <a href="admin.html">Admin Panel</a>
+            </nav>
+        </div>
     </footer>
-  </body>
+
+    <!-- Scripts -->
+    <script src="js/auth.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+</body>
 </html>
-
-
-<script>
-    const bidForm = document.querySelector("#bidding form");
-
-    bidForm.addEventListener("submit", function (e) {
-        e.preventDefault();
-        alert("Your bid has been submitted successfully!");
-    });
-</script>
