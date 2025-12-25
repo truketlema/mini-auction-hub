@@ -390,3 +390,4 @@ let adminPanel;
 document.addEventListener('DOMContentLoaded', function() {
     adminPanel = new AdminPanel();
 });
+

@@ -129,3 +129,4 @@ const Auth = {
 document.addEventListener('DOMContentLoaded', function() {
     Auth.init();
 });
+

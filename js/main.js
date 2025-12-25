@@ -406,3 +406,4 @@ let auctionApp;
 document.addEventListener('DOMContentLoaded', function() {
     auctionApp = new AuctionApp();
 });
+
