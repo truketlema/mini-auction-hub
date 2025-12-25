@@ -6,7 +6,6 @@
     <title>Mini Auction Hub</title>
     <link rel="stylesheet" href="css/style.css" />
   </head>
-
   <body>
     <!-- Header -->
     <header class="main-header">
@@ -41,13 +40,65 @@
           <p>Discover unique collectibles and place your bids</p>
         </div>
 
-        <div id="auctions-grid" class="auctions-grid">
-          <!-- Auctions will be loaded dynamically -->
-        </div>
+        <!-- Auctions Grid (API-loaded auctions) -->
+        <div
+          id="auctions-grid"
+          class="auctions-grid"
+          style="
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+          "
+        ></div>
 
-        <div id="no-auctions" class="no-data" style="display: none">
-          <h3>No auctions available</h3>
-          <p>Check back later for new items!</p>
+        <!-- Hardcoded fallback auctions -->
+        <div
+          id="default-auctions"
+          class="auctions-grid"
+          style="
+            display: none;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+          "
+        >
+          <div class="auction-item">
+            <img
+              src="images/watch.jpg"
+              alt="Vintage Watch"
+              class="auction-image"
+            />
+            <h4>Vintage Collector’s Watch (1953)</h4>
+            <p>
+              <strong>Starting Price:</strong> $80 |
+              <strong>Current Bid:</strong> $120
+            </p>
+          </div>
+          <div class="auction-item">
+            <img
+              src="images/watch2.avif"
+              alt="Luxury Wristwatch"
+              class="auction-image"
+            />
+            <h4>Luxury Wristwatch (2020)</h4>
+            <p>
+              <strong>Starting Price:</strong> $150 |
+              <strong>Current Bid:</strong> $200
+            </p>
+          </div>
+          <div class="auction-item">
+            <img
+              src="images/watch3.jpeg"
+              alt="Classic Gold Watch"
+              class="auction-image"
+            />
+            <h4>Classic Gold Watch (1985)</h4>
+            <p>
+              <strong>Starting Price:</strong> $200 |
+              <strong>Current Bid:</strong> $250
+            </p>
+          </div>
         </div>
       </section>
 
@@ -77,7 +128,6 @@
                 <label for="selected-item">Select Item:</label>
                 <select id="selected-item" required>
                   <option value="">Choose an auction item...</option>
-                  <!-- Items will be loaded dynamically -->
                 </select>
               </div>
 
@@ -125,9 +175,7 @@
         <div class="history-container">
           <div class="recent-bids">
             <h3>Recent Bids</h3>
-            <div id="bid-history-list" class="bid-list">
-              <!-- Bid history will be loaded dynamically -->
-            </div>
+            <div id="bid-history-list" class="bid-list"></div>
           </div>
 
           <aside class="bid-stats">
@@ -155,9 +203,6 @@
     <footer class="main-footer">
       <div class="footer-content">
         <p>&copy; 2025 Mini Auction Hub | All Rights Reserved</p>
-        <nav class="footer-nav">
-          <a href="admin.html">Admin Panel</a>
-        </nav>
       </div>
     </footer>
 
