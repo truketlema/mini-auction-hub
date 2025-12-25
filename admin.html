@@ -3,80 +3,189 @@
   <head>
     <meta charset="UTF-8" />
     <title>Auction Admin Panel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f6f8;
+        margin: 0;
+        padding: 0;
+      }
+
+      header {
+        background: #111;
+        color: white;
+        padding: 20px;
+        text-align: center;
+      }
+
+      section {
+        max-width: 900px;
+        margin: 30px auto;
+        background: white;
+        padding: 30px;
+        border-radius: 6px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+      }
+
+      h2 {
+        margin-top: 0;
+      }
+
+      fieldset {
+        border: 1px solid #ddd;
+        padding: 20px;
+        margin-bottom: 25px;
+      }
+
+      legend {
+        font-weight: bold;
+        padding: 0 10px;
+      }
+
+      label {
+        font-weight: bold;
+      }
+
+      input,
+      textarea,
+      select {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        box-sizing: border-box;
+      }
+
+      textarea {
+        resize: vertical;
+      }
+
+      button {
+        background: #111;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+
+      button:hover {
+        background: #333;
+      }
+
+      footer {
+        text-align: center;
+        padding: 15px;
+        color: #555;
+        font-size: 14px;
+      }
+    </style>
   </head>
 
   <body>
+    <!-- Header -->
     <header>
       <h1>Admin Dashboard</h1>
-      <hr />
+      <p>Mini Auction Hub — Item Management</p>
     </header>
 
+    <!-- Admin Form Section -->
     <section>
       <h2>Enter Auction Item Information</h2>
 
-      <form method="post" enctype="multipart/form-data">
+      <form id="admin-form">
+        <!-- Item Info -->
         <fieldset>
-          <legend><strong>Item Information</strong></legend>
+          <legend>Item Information</legend>
 
-          <label>Item Name:</label><br />
-          <input type="text" placeholder="e.g., Vintage Watch" /><br /><br />
+          <label for="item-name">Item Name:</label>
+          <input
+            type="text"
+            id="item-name"
+            placeholder="e.g., Vintage Watch"
+            required
+          />
 
-          <label>Item Description:</label><br />
+          <br /><br />
+
+          <label for="item-description">Item Description:</label>
           <textarea
+            id="item-description"
             rows="5"
-            cols="40"
             placeholder="Describe the item"
-          ></textarea
-          ><br /><br />
+            required
+          ></textarea>
 
-          <label>Upload Item Image:</label><br />
-          <input type="file" /><br /><br />
+          <br /><br />
 
-          <label>Starting Price ($):</label><br />
-          <input type="number" placeholder="80" /><br /><br />
+          <label for="item-image">Upload Item Image:</label>
+          <input type="file" id="item-image" accept="image/*" />
 
-          <label>Auction Starting Time:</label><br />
-          <input type="datetime-local" /><br /><br />
+          <br /><br />
 
-          <label>Auction Ending Time:</label><br />
-          <input type="datetime-local" /><br /><br />
+          <label for="starting-price">Starting Price ($):</label>
+          <input type="number" id="starting-price" placeholder="80" required />
+
+          <br /><br />
+
+          <label for="start-time">Auction Starting Time:</label>
+          <input type="datetime-local" id="start-time" required />
+
+          <br /><br />
+
+          <label for="end-time">Auction Ending Time:</label>
+          <input type="datetime-local" id="end-time" required />
         </fieldset>
 
-        <br />
-
+        <!-- Technical Details -->
         <fieldset>
-          <legend><strong>Technical Details</strong></legend>
-          <label>Brand:</label><br />
-          <input type="text" /><br /><br />
+          <legend>Technical Details</legend>
 
-          <label>Model:</label><br />
-          <input type="text" /><br /><br />
+          <label for="brand">Brand:</label>
+          <input type="text" id="brand" placeholder="e.g., Omega" />
 
-          <label>Material:</label><br />
-          <input type="text" /><br /><br />
+          <br /><br />
 
-          <label>Condition:</label><br />
-          <select>
+          <label for="model">Model:</label>
+          <input type="text" id="model" placeholder="e.g., 1953 Classic" />
+
+          <br /><br />
+
+          <label for="material">Material:</label>
+          <input
+            type="text"
+            id="material"
+            placeholder="e.g., Stainless Steel"
+          />
+
+          <br /><br />
+
+          <label for="condition">Condition:</label>
+          <select id="condition">
             <option>Excellent</option>
             <option>Good</option>
             <option>Fair</option>
-            <option>Poor</option></select
-          ><br /><br />
+            <option>Poor</option>
+          </select>
 
-          <label>Shipping:</label><br />
-          <input type="text" placeholder="e.g., Worldwide" /><br /><br />
+          <br /><br />
+
+          <label for="shipping">Shipping:</label>
+          <input type="text" id="shipping" placeholder="e.g., Worldwide" />
         </fieldset>
-
-        <br />
 
         <button type="submit">Save Auction Setup</button>
       </form>
     </section>
 
-    <hr />
-
+    <!-- Footer -->
     <footer>
       <p>&copy; 2025 Mini Auction Hub Admin</p>
     </footer>
+
+    <!-- Admin Logic -->
+    <script src="js/admin.js"></script>
   </body>
 </html>
